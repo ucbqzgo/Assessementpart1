@@ -1,0 +1,49 @@
+---
+title: "cousework"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+getwd()
+
+```
+```{r}
+install.packages("maptools")
+install.packages("RColorBrewer")
+install.packages("classInt")
+install.packages("OpenStreetMap")
+install.packages("sp")
+install.packages("rgeos")
+install.packages("tmap")
+install.packages("tmaptools")
+install.packages("sf")
+install.packages("rgdal")
+install.packages("geojsonio")
+library(maptools)
+library(RColorBrewer)
+library(classInt)
+library(OpenStreetMap)
+library(sp)
+library(rgeos)
+library(tmap)
+library(tmaptools)
+library(sf)
+library(rgdal)
+library(geojsonio)
+EW <- geojson_read("http://geoportal.statistics.gov.uk/datasets/8edafbe3276d4b56aec60991cbddda50_2.geojson", what = "sp")
+qtm(london_osm) + 
+  tm_shape(BoroughDataMap) + 
+  tm_polygons("Rate.of.JobSeekers.Allowance..JSA..Claimants...2015", 
+              style="jenks",
+              palette="YlOrBr",
+              midpoint=NA,
+              title="Rate per 1,000 people",
+              alpha = 0.5) + 
+  tm_compass(position = c("left", "bottom"),type = "arrow") + 
+  tm_scale_bar(position = c("left", "bottom")) +
+  tm_layout(title = "Job seekers' Allowance Claimants", legend.position = c("right", "bottom"))
+```
+
